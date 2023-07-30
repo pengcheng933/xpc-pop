@@ -23,6 +23,8 @@
 			case 0:
 			url = '/pages/loadingAndToast/loadingAndToast'
 			break
+			case 1:
+			url ='/pages/modal/modal'
 		}
 		uni.navigateTo({
 			url

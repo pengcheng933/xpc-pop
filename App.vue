@@ -1,6 +1,5 @@
 <script>
-	import {Pop} from './uni_modules/xpc-pop/common/pop.js'
-	console.log(Pop);
+	import {Pop} from './uni_modules/xpc-pop/common/pop'
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')

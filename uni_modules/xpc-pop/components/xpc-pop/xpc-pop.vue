@@ -10,10 +10,7 @@
 	const loadingAndToast =ref(null)
 	const modalPop = ref(null)
 	const id = String(new Date().getTime()) + Math.floor(Math.random()*1000)
-	console.log(id);
 	onMounted(()=>{
-		console.log(this);
-		console.log(loadingAndToast.value, modalPop.value);
 		Pop.addMethods('loadingAndToast',{
 			id,
 			show: loadingAndToast.value.show,
@@ -32,6 +29,9 @@
 		Pop.delMethods('modalPop',{
 			id
 		})
+	})
+	defineExpose({
+		id
 	})
 </script>
 <style scoped lang="scss">

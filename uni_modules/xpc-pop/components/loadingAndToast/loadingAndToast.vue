@@ -1,10 +1,10 @@
 <template>
-	<drawerCom ref="drawer" :transition="transition" :maskShow="false" :mask="false">
-		<div class="box" :class="{ toastBox: !showData.isLoading, noTitleBox: !showData.title }">
+	<drawerCom ref="drawer" :transition="transition" :maskShow="maskShow" :mask="false">
+		<div class="box" :class="{ loadingBox: showData.isLoading, noTitleBox: !showData.title }" :style="BoxStyle">
 			<div class="loading" v-if="showData.isLoading">
-				<image class="image" src="/static/loading.png"></image>
+				<image class="image" :src="imageUrl"></image>
 			</div>
-			<div class="title" v-if="showData.title">
+			<div class="title" v-if="showData.title" :style="titleStyle">
 				{{ showData.title }}
 			</div>
 		</div>
@@ -20,13 +20,41 @@
 	const drawer = ref()
 	// loading不给动画，toast给
 	const transition = computed(() => {
-		return showData.value.isLoading ? 'none' : 'fade'
+		return showData.value.isLoading ? 'none' : showData.value.transition || 'fade'
+	})
+	// 计算各种样式
+	const titleStyle = computed(() => {
+		return {
+			color: showData.value.titleColor,
+			fontSize: showData.value.titleFontSize,
+			lineHeight: showData.value.titleLineHeight
+		}
+	})
+	const BoxStyle = computed(() => {
+		return {
+			width: showData.value.width,
+			height: showData.value.height,
+			borderRadius: showData.value.borderRadius,
+		}
+	})
+	const imageUrl = computed(()=>{
+		return showData.value.imageUrl || '/static/loading.png'
+	})
+	const imageStyle = computed(()=>{
+		return {
+			width: showData.value.imageWidth,
+			height: showData.value.imageHeight
+		}
+	}) 
+	// 是否展示遮罩
+	const maskShow = computed(()=>{
+		return showData.value.maskShow
 	})
 	// 展示组件，该方法最终保存于PopClass类中，通过全局globalData.showPop调用该方法
 	const show = (data) => {
 		showData.value = data
 		// 如果是弹窗延时关闭
-		if (!data.isLoading) {
+		if (Number(data.duration) !== 0) {
 			setTimeout(() => {
 				getApp().globalData.popClose({
 					type: 'loadingAndToast'
@@ -46,21 +74,22 @@
 </script>
 <style scoped lang="scss">
 	.box {
-		background-color: #4c4c4c;
-		min-width: 316rpx;
-		height: 316rpx;
+		background-color: #585858;
+		min-width: 290rpx;
+		padding: 12rpx 20rpx;
 		position: relative;
-		border-radius: 30rpx;
-		padding: 88rpx 22rpx 52rpx;
+		border-radius: 8rpx;
 		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		flex-direction: column;
+
 		.loading {
 			width: 70rpx;
 			height: 70rpx;
 			animation: rotate 2s infinite backwards;
+			flex-shrink: 0;
 
 			.image {
 				width: 100%;
@@ -121,19 +150,12 @@
 				transform: rotate(360deg);
 			}
 		}
-
-		.title {
-			font-size: 34rpx;
-			color: #ffffff;
-			line-height: 48rpx;
-		}
 	}
 
-	.toastBox {
-		height: auto;
-		padding: 30rpx 39rpx;
-		background-color: rgba(0, 0, 0, 0.8);
+	.loadingBox {
+		width: 290rpx;
 		border-radius: 20rpx;
+		text-align: center;
 	}
 
 	.noTitleBox {

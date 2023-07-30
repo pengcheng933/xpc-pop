@@ -7,7 +7,7 @@
     >
       <slot></slot>
     </view>
-    <view v-if="maskShow" class="lu-popup-mask" :class="popupMaskClass"></view>
+    <view v-if="maskShow" class="lu-popup-mask" :class="popupMaskClass" @tap="maskClick"></view>
   </view>
 </template>
 <script setup>
@@ -35,6 +35,8 @@ const props = defineProps({
   }
 })
 const { type, transition, backgroundColor, maskShow, mask } = toRefs(props)
+const emit = defineEmits(['emitMaskClick'])
+
 // 用于控制加入动画
 const newTransition = ref(true)
 // 用于控制显示组件
@@ -84,6 +86,9 @@ const close = () => {
   setTimeout(() => {
     newActive.value = false
   }, 300)
+}
+const maskClick = () => {
+	emit('emitMaskClick')
 }
 defineExpose({
   show,

@@ -12,6 +12,15 @@
 				"navigationBarTitleText": "加载和提示"
 			}
 		}
+        ,{
+            "path" : "pages/modal/modal",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "确认框",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
