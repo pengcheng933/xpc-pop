@@ -16,7 +16,7 @@
 | imageUrl     |  loading图片,默认有自带loading | String|
 | imageWidth   |  图片宽度  | String |
 | imageHeight  |  图片高度  | String |
-| transition   |  动画效果,loading时设置此属性无效,taost默认设置为fade | String（slider /| fade） |
+| transition   |  动画效果,loading时设置此属性无效,taost默认设置为fade | String（slider \| fade） |
 | maskShow     |  背景遮罩  | Boolean|
 注： toast自动关闭的弹窗，调用需要节流处理
 ## 传入参数说明 modalPop
@@ -38,7 +38,7 @@
 | editable     |  是否展示输入框,默认值false | Boolean |
 | placeholderText | 输入框提示文本 | String |
 | inputStyle   |  输入框样式 | Object  |
-| transition   |  动画效果,默认设置为fade | String（slider /| fade /| null） |
+| transition   |  动画效果,默认设置为fade | String（slider \| fade \| null） |
 | maskShow     |  背景遮罩  | Boolean|
 | clickMask    |  能否点击遮罩关闭弹窗,默认值为flase,不能点击 | Boolean |
 # 调用示例
