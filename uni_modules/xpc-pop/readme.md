@@ -16,7 +16,7 @@
 | imageUrl     |  loading图片,默认有自带loading | String|
 | imageWidth   |  图片宽度  | String |
 | imageHeight  |  图片高度  | String |
-| transition   |  动画效果,loading时设置此属性无效,taost默认设置为fade | String（slider | fade） |
+| transition   |  动画效果,loading时设置此属性无效,taost默认设置为fade | String（slider \| fade） |
 | maskShow     |  背景遮罩  | Boolean|
 注： toast自动关闭的弹窗，调用需要节流处理
 ## 传入参数说明 modalPop
@@ -38,10 +38,49 @@
 | editable     |  是否展示输入框,默认值false | Boolean |
 | placeholderText | 输入框提示文本 | String |
 | inputStyle   |  输入框样式 | Object  |
-| transition   |  动画效果,默认设置为fade | String（slider | fade | null） |
+| transition   |  动画效果,默认设置为fade | String（slider \| fade \| null） |
 | maskShow     |  背景遮罩  | Boolean|
 | clickMask    |  能否点击遮罩关闭弹窗,默认值为flase,不能点击 | Boolean |
 # 调用示例
+## 普通组件调用
+注意：这样调用没得默认值
+```javascript
+<template>
+	<xpc-pop ref="pop"></xpc-pop>
+	<div @tap="showToast">打开提示弹窗</div>
+	<br/>
+	<br/>
+	<div @tap="showModal">打开对话框</div>
+	<div>选择的状态:{{ JSON.stringify(modalStatus)}}</div>
+</template>
+
+<script setup>
+	import {ref} from 'vue'
+	const pop = ref('pop')
+	const modalStatus = ref('')
+	const showToast = () => {
+		pop.value.show({
+			type:'loadingAndToast',
+			title: '提示弹窗',
+			duration: 2000
+		})
+	}
+	const showModal = () => {
+		pop.value.show({
+			type:'modalPop',
+			title: '确认框',
+			content: '确认框内容',
+			confirmText: '确认',
+			success: (res)=>{
+				modalStatus.value = res
+			}
+		})
+	}
+	
+</script>
+```
+## 普通组件调用
+这种调用先挂载在globalData上，后续直接通过globalData上挂载的方法调用
 ```javascript
 // 在App.vue中先引用
 <script>
@@ -101,6 +140,81 @@
 	padding: 0 60rpx;
 	justify-content: space-between;
 }
+</style>
+
+```
+## 覆盖原生导航栏
+```javascript
+// 先新建一个pagePop.vue页面
+<template>
+		<xpc-pop></xpc-pop>
+</template>
+
+<script setup>
+	uni.$on('pop',(data)=>{
+		getApp().globalData.popShow(data)
+	})
+</script>
+
+<style>
+	page{
+		background-color: transparent;
+	}
+
+</style>
+// 在page.json中注册
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+		    "path" : "pages/pagePop/pagePop",
+		    "style" :                                                                                    
+		    {
+		         "navigationStyle":"custom",
+				 "app-plus": {
+				 	"animationDuration": 200,
+					"animationType": "fade-in",
+					"background": "transparent",
+					"backgroundColorTop": "transparent",
+					"popGesture": "none",
+					"scrollIndicator": false,
+					"titleNView": false
+				 }
+		    }
+		    
+		}
+}
+// 使用示范
+<template>
+	<div @tap="goPagePop">覆盖原生导航栏</div>
+</template>
+
+<script setup>
+	const goPagePop = () => {
+		uni.navigateTo({
+			url: "/pages/pagePop/pagePop"
+		})
+		setTimeout(()=>{
+			uni.$emit('pop',{
+				type: 'modalPop',
+				title: '标题',
+				content: '内容',
+				cancelStyle: {
+					color: 'gray',
+					border: '1rpx solid #000',
+					borderRadius: '12rpx'
+				},
+				success: (res) => {
+					console.log(res);
+					// 调用成功后返回
+					uni.navigateBack()
+				}
+			})
+		})
+	}
+</script>
+
+<style>
+
 </style>
 
 ```

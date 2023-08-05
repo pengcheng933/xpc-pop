@@ -25,6 +25,16 @@
 			break
 			case 1:
 			url ='/pages/modal/modal'
+			break
+			case 2:
+			url ='/pages/invoke/component'
+			break
+			case 3:
+			url ='/pages/invoke/function'
+			break
+			case 4:
+			url ='/pages/invoke/page'
+			break
 		}
 		uni.navigateTo({
 			url
@@ -32,7 +42,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 	.content {
 		display: flex;
 		flex-direction: column;

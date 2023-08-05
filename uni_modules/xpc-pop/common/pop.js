@@ -63,7 +63,7 @@ class PopClass {
 		popInstances.isActive = false
 		popInstances.close()
 		if (data.type === 'modalPop') {
-			this.resolve(data.result)
+			this.resolve && this.resolve(data.result)
 		}
 	}
 	// 判断当前是否有弹窗在展示了

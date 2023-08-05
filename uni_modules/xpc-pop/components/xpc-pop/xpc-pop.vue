@@ -30,8 +30,26 @@
 			id
 		})
 	})
+	// 打开弹窗
+	const show = (data) => {
+		if(data.type === 'loadingAndToast'){
+			loadingAndToast.value.show(data)
+		}else{
+			modalPop.value.show(data)
+		}
+	}
+	// 关闭弹窗
+	const close=(data)=>{
+		if(data.type === 'loadingAndToast'){
+			loadingAndToast.value.close(data)
+		}else{
+			modalPop.value.close(data)
+		}
+	}
 	defineExpose({
-		id
+		id,
+		show,
+		close
 	})
 </script>
 <style scoped lang="scss">

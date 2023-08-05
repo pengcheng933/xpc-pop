@@ -21,6 +21,49 @@
             }
             
         }
+        ,{
+            "path" : "pages/invoke/component",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "正常组件调用",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/invoke/function",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "函数式调用",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/invoke/page",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "覆盖原生导航栏调用"
+            }
+            
+        }
+		,{
+		    "path" : "pages/pagePop/pagePop",
+		    "style" :                                                                                    
+		    {
+		         "navigationStyle":"custom",
+				 "app-plus": {
+				 	"animationDuration": 200,
+					"animationType": "fade-in",
+					"background": "transparent",
+					"backgroundColorTop": "transparent",
+					"popGesture": "none",
+					"scrollIndicator": false,
+					"titleNView": false
+				 }
+		    }
+		    
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
