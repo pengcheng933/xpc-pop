@@ -151,7 +151,6 @@ defineExpose({
     align-content: flex-start;
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 1;
-    overflow: scroll;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     &.lu-popup-transition-fade {
       transform: translate3d(0, 0, 0) scale(0.3);

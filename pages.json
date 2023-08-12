@@ -64,6 +64,14 @@
 		    }
 		    
 		}
+        ,{
+            "path" : "pages/other/other",
+            "style" :
+            {
+                "navigationBarTitleText": "其他用法"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

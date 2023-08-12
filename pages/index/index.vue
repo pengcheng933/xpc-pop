@@ -8,14 +8,14 @@
 			<div v-for="(item, index) in featureTitle" @tap="gotoFeaturePage(index)">{{item}}</div>
 		</div>
 		<div class="usage functionality">
-			<div v-for="(item, index) in usageTitle" @tap="gotoFeaturePage(index+2)">{{item}}</div>
+			<div v-for="(item, index) in usageTitle" @tap="gotoFeaturePage(index+3)">{{item}}</div>
 		</div>
 	</view>
 </template>
 
 <script setup>
 	const title = 'hello'
-	const featureTitle = ['加载和提示', '确认框']
+	const featureTitle = ['加载和提示', '确认框','其他用法']
 	const usageTitle = ['正常组件使用', '函数时调用使用','覆盖导航菜单']
 	const gotoFeaturePage = (index) => {
 		let url;
@@ -27,12 +27,15 @@
 			url ='/pages/modal/modal'
 			break
 			case 2:
-			url ='/pages/invoke/component'
+			url = '/pages/other/other'
 			break
 			case 3:
-			url ='/pages/invoke/function'
+			url ='/pages/invoke/component'
 			break
 			case 4:
+			url ='/pages/invoke/function'
+			break
+			case 5:
 			url ='/pages/invoke/page'
 			break
 		}

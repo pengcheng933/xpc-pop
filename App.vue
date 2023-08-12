@@ -3,7 +3,9 @@
 	export default {
 		globalData:{
 			popShow: Pop.showPop,
-			popClose: Pop.closePop
+			popClose: Pop.closePop,
+			closeAllPop: Pop.closeAllPop,
+			isShow: Pop.isShow
 		}
 	}
 </script>

@@ -8,7 +8,7 @@
 			<div class="inputBox" v-else>
 				<input class="input" :style="inputStyle" :placeholder="showData.placeholderText" v-model="inputModel" />
 			</div>
-			<div class="buttonBox" :class="{buttonBoxCenter: !showData.showCancel}">
+			<div class="buttonBox" :class="{buttonBoxCenter: !showData.showCancel}" :style="buttonStyle">
 				<div class="left  buttonItem" @tap="clickHandler('cancel')" v-if="showData.showCancel"
 					:style="cancelStyle">
 					{{ showData.cancelText }}
@@ -47,6 +47,9 @@
 	})
 	const inputStyle = computed(()=> {
 		return showData.value.inputStyle || {}
+	})
+	const buttonStyle = computed(()=>{
+		return showData.value.buttonStyle || {}
 	})
 	
 	// 计算样式和是否有遮罩
@@ -90,12 +93,14 @@
 	const passClose = (result) => {
 		getApp().globalData.popClose({
 			type: 'modalPop',
+			id: showData.value.id,
 			result
 		})
 		inputModel.value = ''
 	}
 	const drawer = ref()
 	const show = (data) => {
+		console.log(data,'>>');
 		// 保存信息，打开弹窗
 		showData.value = data
 		drawer.value.show()

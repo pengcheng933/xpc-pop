@@ -1,8 +1,8 @@
 {
   "id": "xpc-pop",
   "displayName": "xpc-pop",
-  "version": "1.0.3",
-  "description": "xpc-pop",
+  "version": "1.0.5",
+  "description": "xpc-pop，自定义弹窗，支持组件，函数式调用，可以覆盖原生导航栏，查询是否有激活弹窗",
   "keywords": [
     "xpc-pop"
 ],

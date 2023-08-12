@@ -41,8 +41,10 @@ class PopClass {
 		if (data.id) {
 			popInstances = methodArr.find(item => item.id === data.id) || {}
 		} else {
+			console.log(methodArr);
 			popInstances = methodArr[methodArr.length - 1]
 		}
+		console.log(popInstances);
 		popInstances.isActive = true
 		popInstances.show(showDate)
 		if (data.type === 'modalPop') {
@@ -60,11 +62,22 @@ class PopClass {
 		} else {
 			popInstances = methodArr[methodArr.length - 1]
 		}
-		popInstances.isActive = false
-		popInstances.close()
+		if(!data.id){
+			popInstances.isActive = false
+			popInstances.close()
+		}
 		if (data.type === 'modalPop') {
 			this.resolve && this.resolve(data.result)
 		}
+	}
+	// 关闭所有弹窗
+	closeAllPop = (data) => {
+		const methodArr = this.methods[data?.type || 'modalPop']
+		methodArr.forEach(item=>{
+			if(item.isActive){
+				item.close()
+			}
+		})
 	}
 	// 判断当前是否有弹窗在展示了
 	isShow = (data) => {
@@ -75,7 +88,7 @@ class PopClass {
 		} else {
 			popInstances = methodArr[methodArr.length - 1]
 		}
-		return popInstances.isActive
+		return !!popInstances.isActive
 	}
 }
 const Pop = new PopClass()

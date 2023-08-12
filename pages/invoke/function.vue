@@ -1,4 +1,5 @@
 <template>
+	<xpc-pop></xpc-pop>
 	<div class="loadingAndToast">
 		<div @tap="clickHandler('loading')">loading</div>
 		<div @tap="clickHandler('toast')">toast</div>

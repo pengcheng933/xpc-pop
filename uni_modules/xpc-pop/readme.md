@@ -31,6 +31,7 @@
 | cancelText   |  取消文案,默认值'取消'| String |
 | cancelStyle  |  取消按钮样式,支持内联的CSS样式（字体,大小,宽高...）| Object|
 | confirmStyle |  确认按钮样式,支持内联的CSS样式（字体,大小,宽高...）| Object|
+| buttonStyle  |  按钮总体样式,支持内联的CSS样式（字体,大小,宽高...）| Object|
 | boxStyle     |  外面大盒子的样式,支持内联的CSS样式（字体,大小,宽高...）| Object|
 | titleStyle   |  标题样式,支持内联的CSS样式（字体,大小,宽高...）| Object|
 | contentStyle |  内容样式,支持内联的CSS样式（字体,大小,宽高...）| Object|
@@ -79,7 +80,7 @@
 	
 </script>
 ```
-## 普通组件调用
+## 函数式调用
 这种调用先挂载在globalData上，后续直接通过globalData上挂载的方法调用
 ```javascript
 // 在App.vue中先引用
@@ -211,6 +212,80 @@
 			})
 		})
 	}
+</script>
+
+<style>
+
+</style>
+
+```
+## 其他用法，嵌套弹窗和查询是否有激活弹窗
+```vue
+<template>
+	<xpc-pop ref="pop1"></xpc-pop>
+	<xpc-pop ref="pop2"></xpc-pop>
+	<div class="other">
+		<div @tap="nested">嵌套弹窗</div>
+		<div @tap="popIsActive">检测当前是否有弹窗激活</div>
+	</div>
+</template>
+
+<script setup>
+	import {onMounted, ref} from 'vue'
+	const pop1 = ref()
+	const pop2 = ref()
+	const nestedSuceess = (res) => {
+		getApp().globalData.popShow({
+			type: 'modalPop',
+			id: pop2.value.id,
+			title: '二级弹窗',
+			content: `你确认${res.cancel?'否':'是'}`,
+			boxStyle: {
+				 width: '380rpx',
+				 height: '260rpx',
+				 padding: '0 25rpx'
+			},
+			buttonStyle: {
+				padding: 0
+			},
+			confirmStyle:{
+				height: '50rpx', 
+			},
+			cancelStyle: {
+				height: '50rpx',
+				color: 'gray',
+				border: '1rpx solid #000',
+				borderRadius: '12rpx'
+			},
+			success: (res) => {
+				console.log(res);
+				console.log(getApp().globalData);
+				getApp().globalData.closeAllPop()
+			}
+		})
+		
+	}
+	const nested = ()=>{
+		getApp().globalData.popShow({
+			type: 'modalPop',
+			id: pop1.value.id,
+			title: '一级弹窗',
+			content: '嵌套弹窗',
+			cancelStyle: {
+				color: 'gray',
+				border: '1rpx solid #000',
+				borderRadius: '12rpx',
+			},
+			success: nestedSuceess
+		})
+	}
+	const popIsActive = () => {
+		console.log(getApp().globalData.isShow({
+			type: 'modalPop'
+		}));
+	}
+	
+
 </script>
 
 <style>

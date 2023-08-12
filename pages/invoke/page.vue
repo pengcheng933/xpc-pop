@@ -1,4 +1,5 @@
 <template>
+	<xpc-pop></xpc-pop>
 	<div @tap="goPagePop">覆盖原生导航栏</div>
 </template>
 
