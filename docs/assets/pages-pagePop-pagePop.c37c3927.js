@@ -1,0 +1,1 @@
+import{p as a,j as p,o,c as s,k as e}from"./index-3871ad41.js";import{r,_ as t}from"./uni-app.es.e04eb6a9.js";import{_}from"./_plugin-vue_export-helper.1b428a4d.js";const m=_({__name:"pagePop",setup:_=>(a("pop",(a=>{p().globalData.popShow(a)})),(a,p)=>{const _=r(e("xpc-pop"),t);return o(),s(_)})},[["__scopeId","data-v-a395ed6a"]]);export{m as default};
