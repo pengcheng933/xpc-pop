@@ -77,7 +77,6 @@
   align-content: flex-start;
   transform: translate3d(0, 0, 0) scale(1);
   opacity: 1;
-  overflow: scroll;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 .lu-popup-wrapper .lu-popup-content.lu-popup-transition-fade[data-v-75bd1f84] {
